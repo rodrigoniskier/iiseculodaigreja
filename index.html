@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: A Igreja Primitiva Sob Pressão (Séculos I-III)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- 
+    Narrative Plan:
+    1. Introduction: Hook with the theme of resilience in a declining empire.
+    2. The Roman Context: Visualize the three key areas of Roman decline using cards.
+    3. External Threats: Show the timeline of major persecutions and use a bar chart to compare the reasons.
+    4. Internal Threats: Use cards to explain major heresies and a donut chart to visualize the overall threat to orthodoxy.
+    5. The Church's Response: A flow chart built with HTML/CSS to illustrate how threats led to the three pillars of orthodoxy.
+    6. Conclusion: A final text block summarizing the outcome.
+
+    Visualization Choices:
+    - Roman Decline: 3-Card Layout (HTML/CSS) -> Goal: Organize. Justification: Clearly segments the core issues. NO SVG.
+    - Persecution Timeline: Timeline (HTML/CSS) -> Goal: Change. Justification: Shows chronological events effectively. NO SVG/MERMAID.
+    - Persecution Reasons: Bar Chart (Chart.js) -> Goal: Compare. Justification: Compares the impact of different categorical reasons. NO SVG.
+    - Heresies vs Orthodoxy: Donut Chart + Cards (Chart.js + HTML/CSS) -> Goal: Inform/Compare. Justification: Donut shows the proportion of the threat, cards detail the threats. NO SVG.
+    - Church's Response: Flow Chart (HTML/CSS) -> Goal: Organize/Process. Justification: Maps the cause-and-effect structure of threat leading to solution. NO SVG/MERMAID.
+
+    Color Palette: Modern & Bold (#0A2463, #3E92CC, #D8315B, #F4E285, #FFFFFF)
+    NEITHER Mermaid JS NOR SVG were used.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A2463;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .flow-line {
+            width: 2px;
+            background-color: #3E92CC;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .flow-line-h {
+            height: 2px;
+            background-color: #3E92CC;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body class="text-white antialiased">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-[#F4E285] leading-tight">Resiliência e Fundação</h1>
+            <p class="text-xl md:text-2xl mt-2 text-gray-300">A Igreja Primitiva Sob Pressão (Séculos I-III)</p>
+        </header>
+
+        <section id="contexto" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">O Crisol Romano: Um Império em Declínio</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-300 mb-10">
+                A Igreja Cristã não nasceu em um vácuo, mas no coração de um Império Romano que, apesar de sua imponência, já exibia profundas rachaduras. Este ambiente de crise paradoxalmente preparou o terreno para uma nova fé.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-[#3E92CC] bg-opacity-30 rounded-lg shadow-2xl p-6 text-center border border-[#3E92CC]">
+                    <span class="text-5xl mb-4 block">🏛️</span>
+                    <h3 class="text-xl font-bold mb-2 text-[#F4E285]">Corrupção Política</h3>
+                    <p class="text-gray-300">Governos opressores e uma liderança central enfraquecida minavam a confiança e a estabilidade em todo o império.</p>
+                </div>
+                <div class="bg-[#3E92CC] bg-opacity-30 rounded-lg shadow-2xl p-6 text-center border border-[#3E92CC]">
+                    <span class="text-5xl mb-4 block">📉</span>
+                    <h3 class="text-xl font-bold mb-2 text-[#F4E285]">Crise Social e Econômica</h3>
+                    <p class="text-gray-300">A escravidão massiva e a desigualdade criaram um abismo social, empobrecendo a maioria e gerando desespero.</p>
+                </div>
+                <div class="bg-[#3E92CC] bg-opacity-30 rounded-lg shadow-2xl p-6 text-center border border-[#3E92CC]">
+                    <span class="text-5xl mb-4 block">🎭</span>
+                    <h3 class="text-xl font-bold mb-2 text-[#F4E285]">Decadência Moral</h3>
+                    <p class="text-gray-300">A erosão dos valores tradicionais permeou todas as classes, resultando em uma sociedade desiludida e sem propósito.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="perseguicoes" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Ameaças Externas: O Fogo da Perseguição</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-300 mb-10">
+                Considerados uma ameaça à ordem romana, os cristãos enfrentaram ondas de perseguição violenta. A recusa em adorar o imperador e os deuses romanos era vista como um ato de traição.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="bg-[#0A2463] rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-[#F4E285]">Principais Motivos da Perseguição</h3>
+                    <div class="chart-container">
+                        <canvas id="persecutionChart"></canvas>
+                    </div>
+                    <p class="text-center mt-4 text-gray-400 text-sm">Este gráfico ilustra a intensidade percebida de cada motivo para a perseguição romana, destacando a recusa ao culto imperial como o principal catalisador.</p>
+                </div>
+                <div class="bg-transparent rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-[#F4E285]">Linha do Tempo das Perseguições</h3>
+                    <ul class="space-y-4 relative">
+                        <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-[#3E92CC]"></div>
+                        <li class="pl-12 relative">
+                            <div class="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#D8315B] rounded-full border-4 border-[#0A2463] flex items-center justify-center font-bold">N</div>
+                            <h4 class="font-bold">Nero (c. 64 d.C.)</h4>
+                            <p class="text-gray-400">Primeira grande perseguição, localizada em Roma.</p>
+                        </li>
+                        <li class="pl-12 relative">
+                            <div class="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#D8315B] rounded-full border-4 border-[#0A2463] flex items-center justify-center font-bold">D</div>
+                            <h4 class="font-bold">Domiciano (c. 95 d.C.)</h4>
+                            <p class="text-gray-400">Exigiu adoração como "senhor e deus".</p>
+                        </li>
+                        <li class="pl-12 relative">
+                            <div class="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#D8315B] rounded-full border-4 border-[#0A2463] flex items-center justify-center font-bold">T</div>
+                            <h4 class="font-bold">Trajano (c. 112 d.C.)</h4>
+                             <p class="text-gray-400">Estabeleceu uma política "legal" para a punição.</p>
+                        </li>
+                        <li class="pl-12 relative">
+                            <div class="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#D8315B] rounded-full border-4 border-[#0A2463] flex items-center justify-center font-bold">D</div>
+                            <h4 class="font-bold">Décio (c. 250 d.C.)</h4>
+                            <p class="text-gray-400">Primeira perseguição em todo o império.</p>
+                        </li>
+                        <li class="pl-12 relative">
+                            <div class="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#D8315B] rounded-full border-4 border-[#0A2463] flex items-center justify-center font-bold">D</div>
+                            <h4 class="font-bold">Diocleciano (c. 303 d.C.)</h4>
+                            <p class="text-gray-400">"A Grande Perseguição", a mais severa de todas.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="heresias" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Ameaças Internas: A Batalha pela Doutrina</h2>
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-300 mb-10">
+                Tão perigosos quanto as espadas romanas eram os ensinos divergentes que ameaçavam fragmentar a fé por dentro. A Igreja precisou definir claramente no que cria.
+            </p>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <div class="bg-[#3E92CC] bg-opacity-30 rounded-lg p-6 border border-[#3E92CC]">
+                    <h3 class="text-xl font-bold mb-2 text-center text-[#F4E285]">Gnosticismo</h3>
+                    <p class="text-gray-300">Dualista, ensinava que a matéria era má. A salvação viria por um "conhecimento secreto" (gnose), negando a humanidade de Cristo e a bondade da criação.</p>
+                </div>
+
+                <div class="bg-[#3E92CC] bg-opacity-30 rounded-lg p-6 border border-[#3E92CC]">
+                     <h3 class="text-xl font-bold mb-2 text-center text-[#F4E285]">Marcionismo</h3>
+                    <p class="text-gray-300">Rejeitava o Antigo Testamento, alegando que o Deus hebreu era um ser inferior e vingativo, distinto do Deus de amor revelado por Jesus.</p>
+                </div>
+                
+                <div class="bg-[#3E92CC] bg-opacity-30 rounded-lg p-6 border border-[#3E92CC]">
+                     <h3 class="text-xl font-bold mb-2 text-center text-[#F4E285]">Montanismo</h3>
+                    <p class="text-gray-300">Movimento de "nova profecia" com um moralismo extremo, que desafiava a autoridade das Escrituras e da liderança da Igreja estabelecida.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="respostas" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Os Pilares da Ortodoxia: A Resposta da Igreja</h2>
+             <p class="max-w-3xl mx-auto text-center text-lg text-gray-300 mb-12">
+                Confrontada por ameaças externas e internas, a Igreja forjou três pilares institucionais e doutrinários que não apenas garantiram sua sobrevivência, mas definiram o cristianismo para os milênios seguintes.
+            </p>
+
+            <div class="flex flex-col items-center">
+                <div class="bg-[#D8315B] text-black rounded-lg shadow-lg p-4 mb-8 w-full md:w-1/2 text-center">
+                    <h3 class="text-xl font-bold">AMEAÇAS DUPLAS</h3>
+                    <p class="font-semibold">Perseguição Romana & Heresias Internas</p>
+                </div>
+                
+                <div class="w-2 h-16 bg-[#3E92CC]"></div>
+
+                <div class="flex flex-col md:flex-row justify-around w-full relative">
+                    <div class="w-full md:w-1/3 p-4 flex flex-col items-center text-center relative">
+                        <div class="w-2 h-8 bg-[#3E92CC] absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full hidden md:block"></div>
+                        <div class="h-2 w-full bg-[#3E92CC] absolute left-0 top-0 hidden md:block"></div>
+
+                        <div class="bg-[#3E92CC] w-16 h-16 rounded-full flex items-center justify-center mb-4 text-3xl font-bold">1</div>
+                        <h4 class="text-xl font-bold mb-2 text-[#F4E285]">Cânon do NT</h4>
+                        <p class="text-gray-300">Definição dos livros sagrados com base na autoridade apostólica para garantir a autenticidade da doutrina.</p>
+                    </div>
+
+                    <div class="flex items-center justify-center my-4 md:hidden">
+                        <div class="w-2 h-12 bg-[#3E92CC]"></div>
+                    </div>
+                    
+                    <div class="w-full md:w-1/3 p-4 flex flex-col items-center text-center relative">
+                        <div class="w-2 h-8 bg-[#3E92CC] absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full hidden md:block"></div>
+
+                        <div class="bg-[#3E92CC] w-16 h-16 rounded-full flex items-center justify-center mb-4 text-3xl font-bold">2</div>
+                        <h4 class="text-xl font-bold mb-2 text-[#F4E285]">Credos Universais</h4>
+                        <p class="text-gray-300">Criação de declarações de fé (ex: Credo dos Apóstolos) para unificar o ensino e refutar heresias.</p>
+                    </div>
+
+                    <div class="flex items-center justify-center my-4 md:hidden">
+                        <div class="w-2 h-12 bg-[#3E92CC]"></div>
+                    </div>
+
+                    <div class="w-full md:w-1/3 p-4 flex flex-col items-center text-center relative">
+                        <div class="w-2 h-8 bg-[#3E92CC] absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full hidden md:block"></div>
+                        <div class="h-2 w-full bg-[#3E92CC] absolute right-0 top-0 hidden md:block"></div>
+
+                        <div class="bg-[#3E92CC] w-16 h-16 rounded-full flex items-center justify-center mb-4 text-3xl font-bold">3</div>
+                        <h4 class="text-xl font-bold mb-2 text-[#F4E285]">Sucessão Apostólica</h4>
+                        <p class="text-gray-300">Fortalecimento da figura do bispo como guardião da unidade e da correta transmissão da fé.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-16 pt-8 border-t border-[#3E92CC]">
+            <p class="text-gray-400">Este infográfico é uma representação visual baseada no resumo da História da Igreja Primitiva.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const wrapLabels = (label, maxWidth) => {
+                const words = label.split(' ');
+                let lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).length > maxWidth && currentLine.length > 0) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = currentLine ? currentLine + ' ' + word : word;
+                    }
+                });
+                lines.push(currentLine);
+                return lines;
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+
+            const persecutionCtx = document.getElementById('persecutionChart').getContext('2d');
+            const persecutionLabels = [
+                'Recusa ao Culto Imperial', 
+                'Exclusivismo (considerado "ateísmo")', 
+                'Isolamento Social e Calúnias'
+            ];
+            new Chart(persecutionCtx, {
+                type: 'bar',
+                data: {
+                    labels: persecutionLabels.map(label => wrapLabels(label, 16)),
+                    datasets: [{
+                        label: 'Intensidade do Motivo',
+                        data: [10, 7, 5],
+                        backgroundColor: ['#D8315B', '#3E92CC', '#F4E285'],
+                        borderColor: '#0A2463',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#FFFFFF'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#FFFFFF',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
